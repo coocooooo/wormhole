@@ -8,11 +8,12 @@ import (
 )
 
 func main() {
-	fmt.Println("start server")
+	fmt.Println("start server at http://localhost:9999")
 	f, _ := os.Open("./index.html")
 	defer f.Close()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		_, _ = f.Seek(0, 0)
 		io.Copy(w, f)
 	})
 
